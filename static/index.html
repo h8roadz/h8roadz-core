@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+	<style>
+	
+	#map-canvas {
+		height: 400px;
+	}
+	
+	.btn{
+		margin-left:10px;
+		margin-top:5px;
+	}
+	 
+	 #map-canvas img {
+  		max-width: none;
+	}
+	
+	</style>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+    	<div class="span12">
+        	<div id="tabs"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+    	<div class="span12">
+        	<div id="map-canvas"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+    	<div class="span12">
+        	<div id="button_row">
+            	<button class="btn btn-success" id="logmess" type="button" onClick="">start log</button>
+            	<button class="btn btn-danger" id="pause" type="button" onClick="">pause data</button>
+            	<span class="btn btn-success" id="follower"><i class="icon-star"></i> unfollow</span>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">	
+        <div class="span4">
+        	<div id="gps"></div>
+        </div>
+        <div class="span8">
+        	<div id="sats"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-latest.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	
+	jQuery(function($) {
+		var socket = io.connect();
+		
+		  function convM2F(meters) {
+			  return meters * 3.28;
+		  }
+		  
+		  function convMPS2MPH(meters) {
+			  return meters * 2.236;
+		  }
+
+		function calculateDistance(lat1, lon1, lat2, lon2) {
+				var R, a, c, d, dLat, dLon;
+				R = 6371;
+				dLat = (lat2 - lat1).toRad();
+				dLon = (lon2 - lon1).toRad();
+				a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+				c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+				d = R * c;
+				return d * 1000;
+		};
+ 
+		Number.prototype.toRad = function() {
+				return this * Math.PI / 180;
+		};
+		
+	});
+
+</script>
+
+</body>
+</html>
