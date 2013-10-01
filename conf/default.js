@@ -16,7 +16,7 @@
 	},
 	pubnub: {
 		conf: {
-	   		publish_key: 'pub-c-365a0741-9d97-4b52-a5f8-de2d1d90e7ba',
+	   		publish_key: '',
 	   		subscribe_key: 'sub-c-65503d0c-1b74-11e3-a995-02ee2ddab7fe',
 	   		error: function(err) { console.log('init error: '+err); }
 	   	},
